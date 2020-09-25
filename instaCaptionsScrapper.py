@@ -6,50 +6,21 @@
 
 import requests
 from bs4 import BeautifulSoup
-import json 
-import ast 
 
+my_file = open("Links.txt", "r")
+content = my_file.read()
+content_list = content.splitlines()
+my_file.close()
 
-
-# In[108]:
-
-
-page = requests.get("https://www.instagram.com/p/CFh-2m_M2Ks/")
-page
-
-
-# In[ ]:
-
+for i in content_list:
+    page = requests.get(i)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    print(soup.find_all("title")[0].get_text().partition(':')[2] )
 
 
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[100]:
-
-
-soup = BeautifulSoup(page.content, 'html.parser')
-
-
-# In[109]:
-
-
-print(soup.find_all("title")[0].get_text().partition(':')[2] )
-
-
-# In[ ]:
-
+    
 
 
 
