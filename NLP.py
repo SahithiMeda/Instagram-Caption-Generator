@@ -23,7 +23,8 @@ def NLP(config):
     b.go_to_page("https://www.instagram.com/accounts/login/")
     b.login(username, password)
     wordlist=["Food"]
-    Links = b.get_image_URL(wordlist)
+    count=10
+    Links = b.get_image_URL(wordlist,count)
     generate_txt(Links)
 
 if __name__ == '__main__':

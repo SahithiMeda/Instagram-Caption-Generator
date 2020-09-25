@@ -28,7 +28,19 @@ class Bot:
             self.driver.get(url)
         except NoSuchElementException as ex:
             self.fail(ex.msg)
-
+    def click_on_image(self,count):
+        Links=[]
+        pic=self.driver.find_element_by_class_name("_9AhH0")
+        pic.click()
+        Links.append(self.driver.current_url)
+        while(count!=0):
+            time.sleep(2)
+            nexts=self.driver.find_element_by_css_selector("._65Bje.coreSpriteRightPaginationArrow")
+            nexts.click()
+            Links.append(self.driver.current_url)
+            count=count-1
+        return Links         
+       
     def login(self, username, password):
         self.driver.find_element_by_xpath("//input[@name='username']").send_keys(username)
         self.driver.find_element_by_xpath("//input[@name='password']").send_keys(password)
@@ -41,15 +53,10 @@ class Bot:
         notNow.click()
         time.sleep(5)
     
-    def get_image_URL(self,wordList):
+    def get_image_URL(self,wordList,count):
         URL="https://www.instagram.com/explore/tags/"+wordList[0]
         self.go_to_page(URL)
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'}
-        r = requests.get(URL, headers=headers)
-        soup = BeautifulSoup(r.content, "html.parser")
-        links_with_text = []
-        for a in soup.findAll('a',href=True, attrs={'class':'v1Nh3 kIKUG _bz0w'}):
-            if a.text: 
-                links_with_text.append(a['href'])
-            
+        Links=self.click_on_image(count)
+        return Links
+        
             
