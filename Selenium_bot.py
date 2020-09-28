@@ -37,6 +37,7 @@ class Bot:
             time.sleep(2)
             nexts=self.driver.find_element_by_css_selector("._65Bje.coreSpriteRightPaginationArrow")
             nexts.click()
+            print(self.driver.current_url)
             Links.append(self.driver.current_url)
             count=count-1
         return Links         
