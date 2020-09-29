@@ -24,7 +24,6 @@ Captions=df.iloc[:,0]#.tolist()
 # In[82]:
 
 
-type(Captions[i])
 
 
 # In[88]:
